@@ -1,11 +1,36 @@
 import React from "react";
+import {connect} from "react-redux";
 
-class BookList extends React.Component {
-    render () {
+import BookForm from "./BookForm";
+import {Creators as BookCreateCreators} from "../../store/book/create";
+
+const BusyWaiting = () =>  <div className="progress">
+    <div className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow={75} aria-valuemin={0} aria-valuemax={100} style={{width: '75%'}} />
+</div>;
+
+class BookCreate extends React.Component {
+
+    handleSubmit = (values) => {
+        this.props.dispatch(BookCreateCreators.request(values));
+    };
+
+    render() {
+        const {request} = this.props;
+
         return <div>
-            Book Create
+            {request && <BusyWaiting/>}
+            <h2>Create Book</h2>
+            <BookForm onSubmit={this.handleSubmit}/>
         </div>
     }
 }
 
-export default BookList;
+function mapStateToProps(state, props) {
+    return {
+        createdBook: state.book.create.createdBook,
+        request: state.book.create.request,
+        error: state.book.create.error,
+    }
+}
+
+export default connect(mapStateToProps)(BookCreate);

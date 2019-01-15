@@ -2,7 +2,7 @@ import { createActions, createReducer } from 'reduxsauce';
 
 export const INITIAL_STATE = {
     request: null,
-    items: null,
+    updatedBook: null,
     error: null,
 };
 
@@ -21,7 +21,7 @@ const succeed = (state, action) => {
     return {
         request: null,
         error: null,
-        items: params.items,
+        updatedBook: params.item,
     };
 };
 
@@ -41,7 +41,7 @@ export const { Types, Creators } = createActions({
     start: ['params'],
     succeed: ['params'],
     fail: ['error'],
-}, {prefix: "book-list-"});
+}, {prefix: "book-update-"});
 
 // Reducer
 export const reducer = createReducer(INITIAL_STATE, {
