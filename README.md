@@ -1,5 +1,7 @@
 ## tiki-book Demo
 
+**Online Demo:** https://tiki-book.softworld.studio/
+
 ### Development
 
 * (Optional) Setup Unbutu VM for running Mongodb by using [Vagrant](https://www.vagrantup.com/), skip if your machine is already having Docker and MongoDB server instance.
@@ -54,12 +56,21 @@ npm install
 
   For example, the current content of .env.development in this repo:
   ```  
-  REACT_APP_SERVICES_ROOT=http://localhost:3500
+  REACT_APP_SERVICES_ROOT=http://localhost:3500  
+  // Assume having backend services running at http://localhost:3500
   ```
+
+* Start web
+
+```
+npm run start
+```
 
 => Access it via `<host_ip>:3000` (default).
 
 ### PREVIEW (For Interviewer)
+
+=> **Online demo now available**: https://tiki-book.softworld.studio/
 
 **METHOD 1. USE MY PUBLIC DOCKER IMAGES**
 
@@ -147,7 +158,7 @@ environment:
   * Has a model: **Book** `/server/models/book.json` and expose CRUD endpoints `/api/Books`
   * Settings is gathered at `/server/settings.js`, make use of env vars for deployment variants.
 
-* Other:
+* Others:
 
-  * Use Git-flow 
+  * Use Git-flow. 
   * Setup the services first (+ MongoDB) then a simple React app, then apply Bootstrap.
