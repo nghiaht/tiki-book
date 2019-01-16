@@ -2,12 +2,12 @@
 
 ### Development
 
-* (Optional) Setup Unbutu VM for running Mongodb by using Vagrant
+* (Optional) Setup Unbutu VM for running Mongodb by using [Vagrant](https://www.vagrantup.com/), skip if your machine is already having Docker and MongoDB server instance.
 ```
-vagrant up
-vagrant ssh
+vagrant up  # Create VM
+vagrant ssh # Login to VM
 cd /vagrant/_dev
-./services-up.sh
+./services-up.sh  # Run Docker-compose: MongoDB, create dev database, db user.
 ```
 
 #### Backend Services
@@ -61,23 +61,23 @@ npm install
 
 ### PREVIEW (For Interviewer)
 
-METHOD 1. USE MY PUBLIC DOCKER IMAGES
+**METHOD 1. USE MY PUBLIC DOCKER IMAGES**
 
-* Change `_dev/test.yml` to use 
+* Make changes (uncomment) in `_dev/test.yml` to use 
 ```
 image: nghiaht/tiki-book:services-latest
 ...
 image: nghiaht/tiki-book:web-latest
 ```
-for web and services, and set environment variables if needed
+for web and services, check and set environment variables `DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD, PORT, SERVICES_ROOT`
 
 * Execute `_dev/test-up.sh` 
 
 OR
 
-METHOD 2. USE LOCAL DOCKER IMAGES
+**METHOD 2. USE LOCAL DOCKER IMAGES**
 
-* Build local Docker images if needed:
+* Build local Docker images:
 ```
 tiki-book-services/ci/dockerize.sh
 tiki-book-web/ci/dockerize.sh
@@ -133,12 +133,20 @@ environment:
 
     * Use redux, redux-saga for handling *Books CRUD requests*.
     * Use reduxsauce to minimize the boilercode for defining *action types, action creators*.
-    * Use redux-form for quick form setup.
 
     * Separate reducers, sagas into functions (and become separate folders) (`store/book/create, list, update, detail, delete`) with a mindset: each functions could be implemented by a single developer, so organize files in a separate folder would help for isolating, easier testing.
+
+    * Inspired the "request" approach, each action (get/gets/create/update/delete) would have tuple of 4 actions TYPES: `REQUEST, START, SUCCEED, FAIL` and 4 action CREATORS: `request(), start(), succeed(), fail()`.
+
+    * Use redux-form for quick form setup.    
 
 
 * Backend:
   * Use [Loopback.js v3](https://loopback.io/) to reduce boilercode needed for setup data repositories. It was built on-top **Express** so it does satisfy the requirement.
   * Has a model: **Book** `/server/models/book.json` and expose CRUD endpoints `/api/Books`
   * Settings is gathered at `/server/settings.js`, make use of env vars for deployment variants.
+
+* Other:
+
+  * Use Git-flow 
+  * Setup the services first (+ MongoDB) then a simple React app, then apply Bootstrap.

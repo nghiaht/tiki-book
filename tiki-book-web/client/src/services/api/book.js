@@ -7,6 +7,7 @@ class Book {
      * Get books
      * @param limit
      * @param offset
+     * @param order
      * @returns {Promise<any>}
      */
     getBooks({limit, offset, order}) {
@@ -47,15 +48,17 @@ class Book {
      * @param title
      * @param description
      * @param categories
+     * @param cover
      * @returns {Promise<any>}
      */
-    createBook({title, description, categories}) {
+    createBook({title, description, categories, cover}) {
         return new Promise((resolve, reject) => {
             this.apiClient.post('/api/Books',
                 {
                     title,
                     description,
-                    categories
+                    categories,
+                    cover
                 }
             ).then(response => {
                 resolve(response.data);

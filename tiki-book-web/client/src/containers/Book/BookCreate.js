@@ -12,6 +12,7 @@ const BusyWaiting = () =>  <div className="progress">
 class BookCreate extends React.Component {
 
     handleSubmit = (values) => {
+        console.log("@@ values", values);
         this.props.dispatch(BookCreateCreators.request(values));
     };
 
