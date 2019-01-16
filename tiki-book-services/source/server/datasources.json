@@ -1,1 +1,16 @@
-{"db":{"name":"db","connector":"memory"},"tikibookdb":{"host":"172.16.1.11","port":27017,"url":"","database":"tikibookdb","password":"tiki","name":"tikibookdb","user":"tiki","connector":"mongodb"}}
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "tikibookdb": {
+    "host": "172.16.1.11",
+    "port": 27017,
+    "url": "",
+    "database": "tikibookdb",
+    "password": "tiki",
+    "name": "tikibookdb",
+    "user": "tiki",
+    "connector": "mongodb"
+  }
+}
