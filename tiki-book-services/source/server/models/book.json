@@ -8,15 +8,24 @@
   "properties": {
     "title": {
       "type": "string",
-      "required": true
+      "required": true,
+      "index": true
     },
     "description": {
+      "type": "string"
+    },
+    "cover": {
       "type": "string"
     },
     "categories": {
       "type": [
         "string"
       ]
+    },
+    "createdTime": {
+      "type": "date",
+      "defaultFn": "now",
+      "index": true
     }
   },
   "validations": [],

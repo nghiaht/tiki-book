@@ -2,8 +2,7 @@ import { createActions, createReducer } from 'reduxsauce';
 
 export const INITIAL_STATE = {
     request: null,
-    items: null,
-    hasMore: null,
+    bookDeleted: null,
     error: null,
 };
 
@@ -19,13 +18,10 @@ const start = (state, action) => {
 
 const succeed = (state, action) => {
     const {params} = action;
-    const {items, loadMore} = params;
-
     return {
         request: null,
         error: null,
-        items: loadMore ? state.items.concat(items) : items,
-        hasMore: items && items.length > 0
+        bookDeleted: params.result,
     };
 };
 
@@ -45,7 +41,7 @@ export const { Types, Creators } = createActions({
     start: ['params'],
     succeed: ['params'],
     fail: ['error'],
-}, {prefix: "book-list-"});
+}, {prefix: "book-delete-"});
 
 // Reducer
 export const reducer = createReducer(INITIAL_STATE, {

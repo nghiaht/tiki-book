@@ -5,9 +5,9 @@ import {api} from "../../../services";
 
 export function* createBook({params}) {
     try {
-        const {title, description, categories} = params;
-        yield put(Creators.start({title, description, categories}));
-        const response = yield api.book.createBook({title, description, categories});
+        const {title, description, categories, cover} = params;
+        yield put(Creators.start({title, description, categories, cover}));
+        const response = yield api.book.createBook({title, description, categories, cover});
         yield put(Creators.succeed({
             item: response
         }))

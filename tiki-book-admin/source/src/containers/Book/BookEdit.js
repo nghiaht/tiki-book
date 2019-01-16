@@ -1,6 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
+import {toast} from "react-toastify";
 
 import {Creators as BookDetailCreators} from "../../store/book/detail";
 import {Creators as BookUpdateCreators} from "../../store/book/update";
@@ -15,6 +16,15 @@ class BookEdit extends React.Component {
     componentDidMount() {
         if (this.props.bookId) {
             this.props.dispatch(BookDetailCreators.request({id: this.props.bookId}));
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.updatedBook && this.props.updatedBook !== prevProps.updatedBook) {
+            toast.success("Update book successfully!");
+        }
+        if (this.props.error && this.props.error !== prevProps.error) {
+            toast.error(this.props.error.details.message);
         }
     }
 
@@ -41,6 +51,7 @@ function mapStateToProps(state, props) {
         request: state.book.detail.request || state.book.update.request,
         error: state.book.detail.error || state.book.update.error,
         book: state.book.detail.book,
+        updatedBook: state.book.update.updatedBook
     }
 }
 

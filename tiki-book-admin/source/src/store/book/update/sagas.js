@@ -6,6 +6,7 @@ import {api} from "../../../services";
 export function* updateBook({params}) {
     try {
         const {id, title, description, categories} = params;
+
         yield put(Creators.start({title, description, categories}));
         const response = yield api.book.updateBook({id, title, description, categories});
         yield put(Creators.succeed({

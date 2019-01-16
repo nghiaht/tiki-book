@@ -3,6 +3,7 @@ import listSaga from "./list/sagas";
 import createSaga from "./create/sagas";
 import detailSaga from "./detail/sagas";
 import updateSaga from "./update/sagas";
+import deleteSaga from "./delete/sagas";
 
 export default function* saga() {
     yield all([
@@ -10,5 +11,6 @@ export default function* saga() {
         fork(detailSaga),
         fork(createSaga),
         fork(updateSaga),
+        fork(deleteSaga),
     ]);
 }

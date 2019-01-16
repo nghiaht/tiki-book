@@ -9,13 +9,14 @@ class Book {
      * @param offset
      * @returns {Promise<any>}
      */
-    getBooks({limit, offset}) {
+    getBooks({limit, offset, order}) {
         return new Promise((resolve, reject) => {
             this.apiClient.get('/api/Books', {
                 params: {
                     filter: {
                         limit,
-                        offset
+                        offset,
+                        order
                     }
                 }
             }).then(response => {

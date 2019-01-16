@@ -1,5 +1,6 @@
 import React from "react";
-import {Field, reduxForm} from 'redux-form'
+import {connect} from "react-redux";
+import {Field, reduxForm, getFormValues} from 'redux-form'
 
 /**
  * FormInput used for redux-form
@@ -27,8 +28,7 @@ const FormInput = ({
 
 class BookForm extends React.Component {
     render() {
-        const {handleSubmit, busy, pristine, submitting} = this.props;
-
+        const {handleSubmit, busy, pristine, submitting, values} = this.props;
         return <form onSubmit={handleSubmit}>
             <div className="form-group">
                 <label>Title</label>
@@ -54,6 +54,21 @@ class BookForm extends React.Component {
                 />
             </div>
 
+            <div className="form-group">
+                <label>Cover</label>
+                <Field
+                    name="cover"
+                    component={FormInput}
+                    type="text"
+                    placeholder="Currently supports image url"
+                    className={"form-control"}
+                    disabled={busy}
+                />
+
+                <br />
+                {values && values.cover && <img src={values.cover} className={"img-thumbnail"} width={200} height={100}/>}
+            </div>
+
             <button type="submit" className="btn btn-primary" disabled={busy || pristine || submitting}>Submit</button>
         </form>
     }
@@ -72,8 +87,18 @@ const validate = (values) => {
   return errors;
 };
 
+const FORM_NAME = 'BookForm';
+
+
+function mapStateToProps(state, props) {
+    return {
+        values: getFormValues(FORM_NAME)(state),
+
+    }
+}
+
 export default reduxForm({
-    form: 'BookForm',
+    form: FORM_NAME,
     enableReinitialize: true,
     validate
-})(BookForm)
+})(connect(mapStateToProps)(BookForm));
