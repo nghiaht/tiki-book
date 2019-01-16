@@ -33,14 +33,14 @@ class BookEdit extends React.Component {
     };
 
     render () {
-        const {request, book} = this.props;
+        const {request, book, updatedBook} = this.props;
         const busy = Boolean(request);
 
         return <div>
             {request && <BusyWaiting/>}
             <h2>Change Book</h2>
 
-            <BookForm onSubmit={this.handleSubmit} initialValues={book} busy={busy}/>
+            {!request && (book ? <BookForm onSubmit={this.handleSubmit} initialValues={updatedBook || book} busy={busy}/> : <p>Book not available</p>)}
         </div>
     }
 }

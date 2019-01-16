@@ -88,6 +88,9 @@ tiki-book-web/ci/dockerize.sh
 image: tiki-book-services:latest
 ...
 image: tiki-book-web:latest
+environment:
+ - SERVICES_ROOT: http://<docker_host>:3500 (Replace with correct docker_host)
+...
 ```
 
 * Execute `_dev/test-up.sh` 

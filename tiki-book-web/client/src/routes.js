@@ -7,6 +7,7 @@ import HomePage from "./containers/Home/HomePage";
 import BookList from "./containers/Book/BookList";
 import BookCreate from "./containers/Book/BookCreate";
 import BookEdit from "./containers/Book/BookEdit";
+import BookDetail from "./containers/Book/BookDetail";
 
 import AppLayout from "./layouts/AppLayout";
 
@@ -120,6 +121,7 @@ export class App extends Component {
             <AppLayout>
                 <Switch>
                     <Route exact path={"/"} component={HomePage}/>
+                    <Route exact path={"/books/:id"} component={BookDetail}/>
 
                     <Router basename={"admin"}>
                         <Route component={AdminRoutes}/>
