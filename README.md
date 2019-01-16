@@ -124,6 +124,7 @@ environment:
       * Modal views, just stay at /admin/books, then we can create or update Book in a modal.
       * On **Book List Admin page**:
         * Has **Create** button.
+        * **Edit** book by clicking on the title.
         * Has **Delete** option by clicking the down-arrow button.
         * **Show more** button is diplayed if more books could be loaded.
 
