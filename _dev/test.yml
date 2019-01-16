@@ -1,0 +1,35 @@
+version: "2"
+services:
+  mongo:
+    image: mongo:4.0
+    ports:
+      - "27017:27017"
+    # volumes:
+    #   - mongodb-data:/data/db"
+    restart: always
+
+  services:
+    image: tiki-book-services:latest
+    # image: nghiaht/tiki-book:services-latest
+    ports:
+      - "3500:3000"
+    environment:
+      - PORT=3000
+      - DB_HOST=mongo
+      - DB_PORT=27017
+      - DB_NAME=tikibookdb
+      - DB_USER=tiki
+      - DB_PASSWORD=tiki
+    restart: always
+
+  web:
+    image: tiki-book-web:latest
+    # image: nghiaht/tiki-book:web-latest
+    environment:
+      - PORT=3000
+      - SERVICES_ROOT=http://172.16.1.11:3500
+    ports:
+      - "3000:3000"  
+
+# volumes:
+#   mongodb-data:
